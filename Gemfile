@@ -32,7 +32,7 @@ gem 'bcrypt', '~> 3.1', '>= 3.1.20'
 
 gem 'graphql', '~> 2.0'
 
-#gem "graphiql-rails", "1.7.0", group: :development 
+gem "graphiql-rails", "1.7.0", group: :development 
 
 gem 'graphql_rails', '~> 2.4'
 
