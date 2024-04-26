@@ -271,7 +271,7 @@ DEPENDENCIES
   bootsnap
   capybara
   debug
-  graphiql-rails (= 1.7.0)
+  graphiql-rails
   graphql (~> 2.0)
   graphql_rails (~> 2.4)
   importmap-rails
