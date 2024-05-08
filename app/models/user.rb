@@ -1,6 +1,9 @@
 class User < ApplicationRecord
+  has_many :orders
+  has_many :products
+  
   has_secure_password
-  belongs_to :location, optional: true
+  # belongs_to :location, optional: true
   
   # validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
   # validates :name, presence: true

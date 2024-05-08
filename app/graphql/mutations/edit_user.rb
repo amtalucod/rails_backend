@@ -4,28 +4,32 @@ module Mutations
         argument :credentials, Types::AuthProviderCredentialsInput, required: false
       end
       
-      class LocationInput < Types::BaseInputObject
-        argument :country, String, required: false
-        argument :region, String, required: false
-        argument :city, String, required: false
-      end
+      # class LocationInput < Types::BaseInputObject
+      #   argument :country, String, required: false
+      #   argument :region, String, required: false
+      #   argument :city, String, required: false
+      # end
       
       argument :id, ID, required: true
-      argument :name, String, required: false
+      argument :first_name, String, required: false
+      argument :last_name, String, required: false
+      argument :mobile_number, String, required: false
       argument :auth_provider, AuthProviderEditData, required: false
-      argument :location, LocationInput, required: false
+      # argument :location, LocationInput, required: false
   
       type Types::UserType
   
-      def resolve(id:, name: nil, auth_provider: nil, location: nil)
+      def resolve(id:, first_name: nil, last_name: nil, mobile_number: nil, auth_provider: nil)
         user = User.find(id)
   
         if user.update(
-          name: name || user.name,
+          first_name: first_name || user.first_name,
+          last_name: last_name || user.last_name,
+          mobile_number: mobile_number || user.mobile_number,
           email: auth_provider&.[](:credentials)&.[](:email) || user.email,
           password: auth_provider&.[](:credentials)&.[](:password) || user.password
         )
-          update_location(user, location) if location.present?
+          # update_location(user, location) if location.present?
           user
         else
           # Handle errors accordingly
@@ -38,14 +42,14 @@ module Mutations
 
     
       end
-      def update_location(user, location)
-        user_location = user.location || user.build_location
-        user_location.update(
-          country: location[:country],
-          region: location[:region],
-          city: location[:city]
-        )
-      end
+      # def update_location(user, location)
+      #   user_location = user.location || user.build_location
+      #   user_location.update(
+      #     country: location[:country],
+      #     region: location[:region],
+      #     city: location[:city]
+      #   )
+      # end
       
     end
   end
