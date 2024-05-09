@@ -5,9 +5,12 @@ class User < ApplicationRecord
   has_secure_password
   # belongs_to :location, optional: true
   
-  # validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
-  # validates :name, presence: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :mobile_number, presence: true, uniqueness: true, length: { minimum: 11 }
   validates :email, presence: true, uniqueness: true
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+
   # validate :validate_location_presence
   # validate :validate_photo_url
 
